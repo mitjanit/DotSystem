@@ -15,7 +15,7 @@ class DotLine {
 		this.b = b;
 	}
 
-	/* Uniform Distribution */
+	// Creates an uniform distribution of num points along line.
 	void setDots(int num){
 		dots = new ArrayList<PVector>();
 		for(int i=0; i<num; i++){
@@ -25,10 +25,21 @@ class DotLine {
 		}
 	}
 
+	// Creates an uniform distribution of num points along line with randomness.
+	void setDots(int num, float randX, float randY){
+		dots = new ArrayList<PVector>();
+		for(int i=0; i<num; i++){
+			float x = lerp(a.x, b.x, i/num) + random(-randX, randX);
+			float y = lerp(a.y, b.y, i/num) + random(-randY, randY);
+			dots.add(new PVector(x, y));
+		}
+	}
+
 	ArrayList<PVector> getDots(){
 		return dots;
 	}
 
+	// Return num of dots along line.
 	int getNumDots(){
 		return dots.size();
 	}
