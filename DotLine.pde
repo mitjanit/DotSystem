@@ -28,4 +28,8 @@ class DotLine {
 	ArrayList<PVector> getDots(){
 		return dots;
 	}
+
+	int getNumDots(){
+		return dots.size();
+	}
 }
