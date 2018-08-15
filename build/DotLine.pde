@@ -29,7 +29,7 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v * v ;
+  			v = Ease.inQuad(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -40,7 +40,7 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v * (2 - v) ;
+  			v = Ease.outQuad(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -51,7 +51,40 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v<0.5 ? 2*v*v : -1+(4-2*v)*v ;
+  			v = Ease.inOutQuad(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	void setInSineDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.inSine(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	void setOutSineDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.outSine(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	void setInOutSineDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.inOutSine(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -62,7 +95,7 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v * v * v ;
+  			v = Ease.inCubic(v) ;
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -73,7 +106,18 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = (--v)*v*v+1;
+  			v = Ease.outCubic(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	void setInOutCubicDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.inOutCubic(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -103,7 +147,7 @@ class DotLine {
 		} 
 	}
 
-	void setSinusDots(float num){
+	void setOutSinusDots(float num){
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;

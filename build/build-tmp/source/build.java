@@ -21,20 +21,17 @@ public void setup(){
 	
 	background(255);
 
-	/*PVector a = new PVector(100,100);
-	PVector b = new PVector(700,700);
-	dlu = new DotLine(a, b);
-	dlu.setDots(5);*/
+	dlr = new DotLine(new PVector(100, 100), new PVector(700, 100));
+	dlr.setInOutCubicDots(10);
 
-
-	dlr = new DotLine(new PVector(100, 100), new PVector(700, 700));
-	dlr.setOutCubicDots(6);
+	dlu = new DotLine(new PVector(100, 200), new PVector(700, 200));
+	dlu.setInSineDots(10);
 }
 
 
 public void draw(){
-	//dlu.display(true, true);
 	dlr.display(true, true);
+	dlu.display(true, true);
 }
 
 
@@ -67,7 +64,7 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v * v ;
+  			v = Ease.inQuad(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -78,7 +75,7 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v * (2 - v) ;
+  			v = Ease.outQuad(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -89,7 +86,40 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v<0.5f ? 2*v*v : -1+(4-2*v)*v ;
+  			v = Ease.inOutQuad(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	public void setInSineDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.inSine(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	public void setOutSineDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.outSine(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	public void setInOutSineDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.inOutSine(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -100,7 +130,7 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = v * v * v ;
+  			v = Ease.inCubic(v) ;
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -111,7 +141,18 @@ class DotLine {
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
-  			v = (--v)*v*v+1;
+  			v = Ease.outCubic(v);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			dots.add(new PVector(x, y));
+		} 
+	}
+
+	public void setInOutCubicDots(float num){
+		dots = new ArrayList<PVector>();
+		for (float i = 0; i <= num; i++){
+  			float v = i / num;
+  			v = Ease.inOutCubic(v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
   			dots.add(new PVector(x, y));
@@ -141,7 +182,7 @@ class DotLine {
 		} 
 	}
 
-	public void setSinusDots(float num){
+	public void setOutSinusDots(float num){
 		dots = new ArrayList<PVector>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
@@ -196,6 +237,53 @@ class DotLine {
 			ellipse(p.x, p.y, 5, 5);
 		}
 	}
+}
+
+public static class Ease {
+	
+	// Quad Easing (In, Out, In&Out)
+
+	public static float inQuad(float t) {
+		return t * t ;
+	}
+
+	public static float outQuad(float t) {
+		return t * (2 - t) ;
+	}
+
+	public static float inOutQuad(float t) {
+		return t<0.5f ? 2*t*t : -1+(4-2*t)*t ;
+	}
+
+	// Cubic Easing (In, Out, In&Out)
+	
+	public static float inCubic(float t) {
+		return t * t * t ;
+	}
+
+	public static float outCubic(float t) {
+		return (--t)*t*t+1 ;
+	}
+
+	public static float inOutCubic(float t) {
+		return t < 0.5f ? 4 * t * t * t : ( t - 1 ) * ( 2 * t - 2 ) * ( 2 * t - 2 ) + 1 ;
+	}
+
+
+	// Sine Easing (In, Out, IN&Out)
+
+	public static float inSine(float t ) {
+	    return -1 * cos( t * ( PI / 2 ) ) + 1;
+	}
+
+	public static float outSine(float t ) {
+	    return sin( t * ( PI / 2 ) );
+	}
+
+	public static float inOutSine(float t ) {
+	    return -0.5f * ( cos( PI * t ) - 1 );
+	}
+
 }
   public void settings() { 	size(800, 800); }
   static public void main(String[] passedArgs) {
