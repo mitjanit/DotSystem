@@ -15,113 +15,16 @@ class DotLine {
 		this.b = new PVector(b.x, b.y);
 	}
 
-	// Creates an equidistant distribution of num points along line.
-	void setEquiDots(float num){
+
+	void setDots(float num, int mode){
 		dots = new ArrayList<PVector>();
 		for(float i=0; i<num; i++){
-			float x = lerp(a.x, b.x, i/(num-1));
-			float y = lerp(a.y, b.y, i/(num-1));
+			float v = i / (num-1);
+			v = Ease.ease(v, mode);
+  			float x = (b.x * v) + (a.x * (1 - v));
+  			float y = (b.y * v) + (a.y * (1 - v));
 			dots.add(new PVector(x, y));
 		}
-	}
-
-	void setInQuadDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.inQuad(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setOutQuadDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.outQuad(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setInOutQuadDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.inOutQuad(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setInSineDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.inSine(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setOutSineDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.outSine(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setInOutSineDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.inOutSine(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setInCubicDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.inCubic(v) ;
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setOutCubicDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.outCubic(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
-	}
-
-	void setInOutCubicDots(float num){
-		dots = new ArrayList<PVector>();
-		for (float i = 0; i <= num; i++){
-  			float v = i / num;
-  			v = Ease.inOutCubic(v);
-  			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
-		} 
 	}
 
 

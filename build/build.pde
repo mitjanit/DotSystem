@@ -6,10 +6,10 @@ void setup(){
 	background(255);
 
 	dlr = new DotLine(new PVector(100, 100), new PVector(700, 100));
-	dlr.setInOutCubicDots(10);
+	dlr.setDots(10, Ease.LINEAR);
 
 	dlu = new DotLine(new PVector(100, 200), new PVector(700, 200));
-	dlu.setInSineDots(10);
+	dlu.setDots(10, Ease.INELASTIC);
 }
 
 
