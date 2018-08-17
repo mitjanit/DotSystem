@@ -16,6 +16,7 @@ class DotLine {
 	}
 
 
+	// Creates a set of num. of dots using an Easing function.
 	void setDots(float num, int mode){
 		dots = new ArrayList<PVector>();
 		for(float i=0; i<num; i++){
@@ -99,10 +100,11 @@ class DotLine {
 	}
 
 	void displayDots(){
-		fill(0); noStroke();
+		stroke(0); //noStroke();
 		for(int i=0; i<dots.size(); i++){
 			PVector p = dots.get(i);
-			ellipse(p.x, p.y, 5, 5);
+			//ellipse(p.x, p.y, 5, 5);
+			line(p.x, p.y-5, p.x, p.y+5);
 		}
 	}
 }

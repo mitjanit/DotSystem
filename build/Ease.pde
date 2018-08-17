@@ -3,6 +3,18 @@
 
 public static class Ease {
 
+	public static String METHODS[] = {"LINEAR", 
+									  "INQUAD", "OUTQUAD", "INOUTQUAD", 
+									  "INSINE", "OUTSINE", "INOUTSINE",
+									  "INCUBIC", "OUTCUBIC", "INOUTCUBIC",
+									  "INQUART", "OUTQUART", "INOUTQUART",
+									  "INQUINT", "OUTQUINT", "INOUTQUINT",
+									  "INEXPO", "OUTEXPO", "INOUTEXPO",
+									  "INCIRC", "OUTCIRC", "INOUTCIRC",
+									  "INBOUNCE", "OUTBOUNCE", "INOUTBOUNCE",
+									  "INELASTIC", "OUTELASTIC", "INOUTELASTIC",
+									  "INBACK", "OUTBACK", "INOUTBACK"
+									};
 	//EQUI
 	public static final int LINEAR 		= 0;
 
@@ -50,6 +62,11 @@ public static class Ease {
 	public static final int INELASTIC	 = 25;
 	public static final int OUTELASTIC 	 = 26;
 	public static final int INOUTELASTIC = 27;
+
+	// BACK
+	public static final int INBACK	 	 = 28;
+	public static final int OUTBACK 	 = 29;
+	public static final int INOUTBACK 	 = 30;
 	
 
 	// EASING FUNCTIONS
@@ -84,6 +101,9 @@ public static class Ease {
 			case Ease.INELASTIC: 	return Ease.inElastic(v);
 			case Ease.OUTELASTIC: 	return Ease.outElastic(v);
 			case Ease.INOUTELASTIC: return Ease.inOutElastic(v);
+			case Ease.INBACK: 		return Ease.inBack(v);
+			case Ease.OUTBACK: 		return Ease.outBack(v);
+			case Ease.INOUTBACK: 	return Ease.inOutBack(v);
 			default: return v;
 		}
 	}

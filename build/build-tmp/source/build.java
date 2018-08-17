@@ -15,23 +15,44 @@ import java.io.IOException;
 public class build extends PApplet {
 
 
-DotLine dlu, dlr;
+ArrayList<DotLine> dls;
+
+int numDots = 50;
+float colX = 60;
+float startY = 50;
+float stepY = 60;
+float lineLength = 600;
 
 public void setup(){
 	
 	background(255);
+	fill(0);
 
-	dlr = new DotLine(new PVector(100, 100), new PVector(700, 100));
-	dlr.setDots(10, Ease.LINEAR);
+	dls = new ArrayList<DotLine>();
 
-	dlu = new DotLine(new PVector(100, 200), new PVector(700, 200));
-	dlu.setDots(10, Ease.INELASTIC);
+	int numCol = 1;
+	int j=0;
+	for(int i=0; i<Ease.METHODS.length-6; i++){
+		float y = startY + stepY*j;
+		float x = colX + (4*colX + lineLength)*(numCol-1);
+		float xt = x + lineLength + colX;
+		text (Ease.METHODS[i], xt, y);
+		DotLine dl = new DotLine(new PVector(x, y), new PVector(x+lineLength, y));
+		dl.setDots(numDots, i);
+		dls.add(dl);
+		j++;
+		if(y>=height-3*startY){
+			j=1; numCol++;
+			println(i);
+		}
+	}
 }
 
 
 public void draw(){
-	dlr.display(true, true);
-	dlu.display(true, true);
+	for(int i=0; i<dls.size(); i++){
+		dls.get(i).display(true, true);
+	}
 }
 
 
@@ -51,6 +72,7 @@ class DotLine {
 	}
 
 
+	// Creates a set of num. of dots using an Easing function.
 	public void setDots(float num, int mode){
 		dots = new ArrayList<PVector>();
 		for(float i=0; i<num; i++){
@@ -134,16 +156,31 @@ class DotLine {
 	}
 
 	public void displayDots(){
-		fill(0); noStroke();
+		stroke(0); //noStroke();
 		for(int i=0; i<dots.size(); i++){
 			PVector p = dots.get(i);
-			ellipse(p.x, p.y, 5, 5);
+			//ellipse(p.x, p.y, 5, 5);
+			line(p.x, p.y-5, p.x, p.y+5);
 		}
 	}
 }
+// Easing 
+// Based on https://gist.github.com/gre/1650294
 
 public static class Ease {
 
+	public static String METHODS[] = {"LINEAR", 
+									  "INQUAD", "OUTQUAD", "INOUTQUAD", 
+									  "INSINE", "OUTSINE", "INOUTSINE",
+									  "INCUBIC", "OUTCUBIC", "INOUTCUBIC",
+									  "INQUART", "OUTQUART", "INOUTQUART",
+									  "INQUINT", "OUTQUINT", "INOUTQUINT",
+									  "INEXPO", "OUTEXPO", "INOUTEXPO",
+									  "INCIRC", "OUTCIRC", "INOUTCIRC",
+									  "INBOUNCE", "OUTBOUNCE", "INOUTBOUNCE",
+									  "INELASTIC", "OUTELASTIC", "INOUTELASTIC",
+									  "INBACK", "OUTBACK", "INOUTBACK"
+									};
 	//EQUI
 	public static final int LINEAR 		= 0;
 
@@ -191,6 +228,11 @@ public static class Ease {
 	public static final int INELASTIC	 = 25;
 	public static final int OUTELASTIC 	 = 26;
 	public static final int INOUTELASTIC = 27;
+
+	// BACK
+	public static final int INBACK	 	 = 28;
+	public static final int OUTBACK 	 = 29;
+	public static final int INOUTBACK 	 = 30;
 	
 
 	// EASING FUNCTIONS
@@ -225,6 +267,9 @@ public static class Ease {
 			case Ease.INELASTIC: 	return Ease.inElastic(v);
 			case Ease.OUTELASTIC: 	return Ease.outElastic(v);
 			case Ease.INOUTELASTIC: return Ease.inOutElastic(v);
+			case Ease.INBACK: 		return Ease.inBack(v);
+			case Ease.OUTBACK: 		return Ease.outBack(v);
+			case Ease.INOUTBACK: 	return Ease.inOutBack(v);
 			default: return v;
 		}
 	}
@@ -477,7 +522,7 @@ public static class Ease {
 	}
 
 }
-  public void settings() { 	size(800, 800); }
+  public void settings() { 	size(1800, 900); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "build" };
     if (passedArgs != null) {
