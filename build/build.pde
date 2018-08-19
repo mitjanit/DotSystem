@@ -12,6 +12,16 @@ void setup(){
 	background(255);
 	fill(0);
 
+	createAllEasing();
+}
+
+
+void draw(){
+	displayAllEasing();
+}
+
+void createAllEasing(){
+	
 	dls = new ArrayList<DotLine>();
 
 	int numCol = 1;
@@ -31,8 +41,7 @@ void setup(){
 	}
 }
 
-
-void draw(){
+void displayAllEasing(){
 	for(int i=0; i<dls.size(); i++){
 		dls.get(i).display(true, true);
 	}
