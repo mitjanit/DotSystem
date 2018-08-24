@@ -1,9 +1,11 @@
 # DotSystem
-Dot System
+Sistema de disposició de punts en l'espai.
 
-<h3> Arrangement </h3>
+<h3> Mètodes de disposició dels punts: </h3>
 <ul>
-  <li> Line of Dots: arrange a number of dots a long a line. </li>
-  <li> Circle of Dots: arrange a number of dots a long circle perimeter.</li>
-  <li> Grid of Dots: arrange a number of dots in a grid.</li>
+  <li> DotLine: línia de punts. </li>
+  <li> DotCircle: cercle de punts.</li>
+  <li> DotSpiral: espiral de punts.</li>
+  <li> DotWave: ona de punts.</li>
+  <li> DotGrid: graella de punts.</li>
 </ul>
