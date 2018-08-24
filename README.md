@@ -1,5 +1,6 @@
 # DotSystem
-Sistema de disposició de punts en l'espai.
+DotSystem és un conjunt de classes per a facilitar la disposició de punts en l'espai.
+Utilitza diferents geometries (línia, cercle, rectangle, poligon, ...) i mètodes (random, easing, ...) per a determinar la posició 2D o 3D a l'espai d'un conjunt de punts.
 
 <h3> Mètodes de disposició dels punts: </h3>
 <ul>
