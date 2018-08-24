@@ -1,6 +1,6 @@
 
 
-
+// Line of Dots
 class DotLine extends DotSet {
 	
 	// Line vertexs

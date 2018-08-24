@@ -1,4 +1,6 @@
 
+// Set of Dots
+
 class DotSet {
 	
 	// Collection of dots along line
@@ -19,12 +21,12 @@ class DotSet {
 		return dots;
 	}
 
-	// Return num of dots along line.
+	// Return num of dots of set.
 	public int getNumDots(){
 		return dots.size();
 	}
 
-
+	// Display dots of set.
 	public void displayDots(){
 		stroke(0); //noStroke();
 		for(int i=0; i<dots.size(); i++){
