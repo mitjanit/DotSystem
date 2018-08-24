@@ -1,23 +1,22 @@
 
 
 
-class DotLine {
+class DotLine extends DotSet {
 	
-	// Collection of dots along line
-	ArrayList<PVector> dots;
-
 	// Line vertexs
 	PVector a, b;
 
 	// Constructor
 	DotLine(PVector a, PVector b){
+		super();
 		this.a = new PVector(a.x, a.y);
 		this.b = new PVector(b.x, b.y);
 	}
 
 
 	// Creates a set of num. of dots using an Easing function.
-	void setDots(float num, int mode){
+	@Override
+	public void setDots(float num, int mode){
 		dots = new ArrayList<PVector>();
 		for(float i=0; i<num; i++){
 			float v = i / (num-1);
@@ -72,16 +71,6 @@ class DotLine {
 		}
 	}
 
-	// Return the collection of dots
-	ArrayList<PVector> getDots(){
-		return dots;
-	}
-
-	// Return num of dots along line.
-	int getNumDots(){
-		return dots.size();
-	}
-
 
 	// Dsiplay line and dots
 	void display(boolean showLine, boolean showDots){
@@ -99,12 +88,4 @@ class DotLine {
 		line(a.x, a.y, b.x, b.y);
 	}
 
-	void displayDots(){
-		stroke(0); //noStroke();
-		for(int i=0; i<dots.size(); i++){
-			PVector p = dots.get(i);
-			//ellipse(p.x, p.y, 5, 5);
-			line(p.x, p.y-5, p.x, p.y+5);
-		}
-	}
 }
