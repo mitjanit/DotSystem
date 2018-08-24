@@ -7,6 +7,7 @@
 
 <h3> Geometries de disposició dels punts: </h3>
 <ul>
+  <li> <b>DotSet:</b> conjunt de punts sense relació geomètrica. </li>
   <li> <b>DotLine:</b> línia de punts. </li>
   <li> <b>DotRect:</b> rectangle de punts. </li>
   <li> <b>DotCircle:</b> cercle de punts.</li>
