@@ -23,7 +23,7 @@ class DotLine extends DotSet {
 			v = Ease.ease(v, mode);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
-			dots.add(new PVector(x, y));
+  			addDot(new PVector(x, y));
 		}
 	}
 
