@@ -63,6 +63,30 @@ public void displayAllEasing(){
 	}
 }
 
+class Dot {
+	
+	PVector pos;
+
+	Dot(PVector p){
+		pos = new PVector(p.x, p.y, p.z);
+	}
+
+	public void display(){
+		stroke(0);
+		line(pos.x, pos.y-5, pos.x, pos.y+5);
+	}
+
+	public void display(boolean isCentroid){
+		if(isCentroid){
+			fill(255, 0, 0); noStroke();
+			ellipse(pos.x, pos.y, 5, 5);
+		}
+		else {
+			display();
+		}
+	}
+}
+
 
 // Line of Dots
 class DotLine extends DotSet {
@@ -81,57 +105,57 @@ class DotLine extends DotSet {
 	// Creates a set of num. of dots using an Easing function.
 	@Override
 	public void setDots(float num, int mode){
-		dots = new ArrayList<PVector>();
+		dots = new ArrayList<Dot>();
 		for(float i=0; i<num; i++){
 			float v = i / (num-1);
 			v = Ease.ease(v, mode);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
-  			addDot(new PVector(x, y));
+  			addDot(new Dot(new PVector(x, y)));
 		}
 	}
 
 
 	public void setSmoothDots(float num){
-		dots = new ArrayList<PVector>();
+		dots = new ArrayList<Dot>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
   			v = v * v * (3 - 2 * v);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
+  			dots.add(new Dot(new PVector(x, y)));
 		} 
 	}
 
 	public void setSmootherDots(float num){
-		dots = new ArrayList<PVector>();
+		dots = new ArrayList<Dot>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
   			v = v * v * v * ( v * (6* v - 15) +10);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
+  			dots.add(new Dot (new PVector(x, y)));
 		} 
 	}
 
 	public void setOutSinusDots(float num){
-		dots = new ArrayList<PVector>();
+		dots = new ArrayList<Dot>();
 		for (float i = 0; i <= num; i++){
   			float v = i / num;
   			v = sin(v*HALF_PI);
   			float x = (b.x * v) + (a.x * (1 - v));
   			float y = (b.y * v) + (a.y * (1 - v));
-  			dots.add(new PVector(x, y));
+  			dots.add(new Dot(new PVector(x, y)));
 		} 
 	}
 
 	// Creates an equidistant distribution of num points along line with randomness.
 	public void setEquiDots(float num, float randX, float randY){
-		dots = new ArrayList<PVector>();
+		dots = new ArrayList<Dot>();
 		for(float i=0; i<num; i++){
 			float x = lerp(a.x, b.x, i/(num-1)) + random(-randX, randX);
 			float y = lerp(a.y, b.y, i/(num-1)) + random(-randY, randY);
-			dots.add(new PVector(x, y));
+			dots.add(new Dot(new PVector(x, y)));
 		}
 	}
 
@@ -159,28 +183,28 @@ class DotLine extends DotSet {
 class DotSet {
 	
 	// Collection of dots along line
-	public ArrayList<PVector> dots;
+	public ArrayList<Dot> dots;
 	// Centroid of set of dots
-	PVector centroid;
+	Dot centroid;
 
 	//Constructor
 	public DotSet(){
-		dots = new ArrayList<PVector>();
+		dots = new ArrayList<Dot>();
 	}
 
 	// Creates a set of num. of dots using different modes.
 	public void setDots(float num, int mode){
-		dots = new ArrayList<PVector>();
+		dots = new ArrayList<Dot>();
 	}
 
 	// Add a dot to the set
-	public void addDot(PVector p){
-		dots.add(p);
+	public void addDot(Dot d){
+		dots.add(d);
 		centroid = getCentroid();
 	}
 
 	// Return the collection of dots
-	public ArrayList<PVector> getDots(){
+	public ArrayList<Dot> getDots(){
 		return dots;
 	}
 
@@ -189,31 +213,82 @@ class DotSet {
 		return dots.size();
 	}
 
+	//*************** CENTROID, MAX, MIN *******************//
+
 	// Calculate de centroide of the set of dots
-	public PVector getCentroid(){
+	public Dot getCentroid(){
 		PVector c = new PVector();
-		for(PVector p : dots){
-			c.add(p);
+		for(Dot d : dots){
+			c.add(d.pos);
 		}
-		
-		return c.div(dots.size());
+		c.div(dots.size());
+		return new Dot(c);
 	}
+
+	// Return the dot of the set with minim X coordinate
+	public Dot getMinX(){
+		Dot dMinX = dots.get(0);
+		float minX = 100000;
+		for(Dot d : dots){
+			if(d.pos.x<minX){
+				minX = d.pos.x;
+				dMinX = d;
+			}
+		}
+		return dMinX;
+	}
+
+	// Return the dot of the set with minim Y coordinate
+	public Dot getMinY(){
+		Dot dMinY = dots.get(0);
+		float minY = 100000;
+		for(Dot d : dots){
+			if(d.pos.y<minY){
+				minY = d.pos.y;
+				dMinY = d;
+			}
+		}
+		return dMinY;
+	}
+
+	// Return the dot of the set with maximum X coordinate
+	public Dot getMaxX(){
+		Dot dMaxX = dots.get(0);
+		float maxX = -100000;
+		for(Dot d : dots){
+			if(d.pos.x>maxX){
+				maxX = d.pos.x;
+				dMaxX = d;
+			}
+		}
+		return dMaxX;
+	}
+
+	// Return the dot of the set with maximum Y coordinate
+	public Dot getMaxY(){
+		Dot dMaxY = dots.get(0);
+		float maxY = -100000;
+		for(Dot d : dots){
+			if(d.pos.y>maxY){
+				maxY = d.pos.y;
+				dMaxY = d;
+			}
+		}
+		return dMaxY;
+	}
+
+
+
+	//************** DISPLAY FUNCTIONS ***************//
 
 	// Display dots of set.
 	public void displayDots(){
-		stroke(0); //noStroke();
-		for(int i=0; i<dots.size(); i++){
-			PVector p = dots.get(i);
-			//ellipse(p.x, p.y, 5, 5);
-			line(p.x, p.y-5, p.x, p.y+5);
+		for(Dot d : dots){
+			d.display();
 		}
+		centroid.display(true);
 	}
 
-	// Display centroid
-	public void displayCentroid(){
-		fill(255, 0, 0); noStroke();
-		ellipse(centroid.x, centroid.y, 5, 5);
-	}
 
 }
 // Easing 

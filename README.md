@@ -20,3 +20,10 @@
 <ul>
   <li> <b>Random:</b> disposició aleatòria dels punts. </li>
 </ul>
+
+<h3> Altres funcionalitats del conjunt de punts: </h3>
+<ul>
+  <li> <b>Centroide:</b> cálcul del centre de masses. </li>
+  <li> <b>Minim X, Y:</b> punt amb la menor coordenada X o Y. </li>
+  <li> <b>Màxim X, Y:</b> punt amb la major coordenada X o Y. </li>
+</ul>
