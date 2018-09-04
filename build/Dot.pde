@@ -22,6 +22,21 @@ class Dot {
 		pos = new PVector(x, y);
 	}
 
+	//Circle movement
+	public void moveRound(PVector centre, float angle){
+		float radius = dist(pos.x, pos.y, centre.x, centre.y);
+		float x = centre.x + radius*cos(angle); 
+		float y = centre.y + radius*sin(angle); 
+		pos = new PVector(x, y);
+	}
+
+	//Circle movement
+	public void moveRound(PVector centre, float radius, float angle){
+		float x = centre.x + radius*cos(angle); 
+		float y = centre.y + radius*sin(angle); 
+		pos = new PVector(x, y);
+	}
+
 	//Random walk movement
 	public void moveRandom(float minValue, float maxValue){
 		float randX = random(minValue, maxValue); 
