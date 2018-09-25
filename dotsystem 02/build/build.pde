@@ -9,16 +9,10 @@ color  bgColor    = #FCFCFC;
 
 DotPolygon dp;
 
-int numVertexs = 4;
-int minNumVertexs = 3;
-int maxNumVertexs = 8;
+IntRange numVertexs = new IntRange(4, 3, 8, 1, true);
+IntRange numDots = new IntRange(10, 5, 20, 1, true);
+IntRange mode = new IntRange(3, 0, new Ease().METHODS.length-1, 1, true);
 
-
-int numDots = 10;
-int minNumDots = 5;
-int maxNumDots = 20;
-
-int mode = 3;
 float angle=0;
 boolean updatePolygon = true;
 
@@ -36,20 +30,20 @@ void setup(){
 	font = createFont("Arial", 14);
 	textFont(font);
 
-	createDotPolygon(numVertexs, new PVector(width/2, height/2), 400, PI/numVertexs);
+	createDotPolygon(numVertexs.getValue(), new PVector(width/2, height/2), 400, PI/numVertexs.getValue());
 }
 
 
 void draw(){
 
-	int nd = (int) map(mouseX, 0, width, minNumDots, maxNumDots);
+	int nd = (int) map(mouseX, 0, width, numDots.getMinValue(), numDots.getMaxValue());
 
-	if(nd!=numDots || updatePolygon){
-		numDots = nd;
+	if(nd!=numDots.getValue() || updatePolygon){
+		numDots.setValue(nd);
 		updatePolygon = false;
 
 		background(bgColor);
-		createDotPolygon(numVertexs, new PVector(width/2, height/2), 400, angle);
+		createDotPolygon(numVertexs.getValue(), new PVector(width/2, height/2), 400, angle);
 		dp.display(true, true, true);
 		displayInfo(60, 60, 20);
 
@@ -75,7 +69,7 @@ void createDotPolygon(int numV, PVector c, float r, float a0){
 		angle += TWO_PI/(float)numV;
 	}
 
-	dp.setDots(numDots, mode);
+	dp.setDots(numDots.getValue(), mode.getValue());
 }
 
 
@@ -83,39 +77,27 @@ void displayInfo(float x, float y, float stepY){
 	textAlign(LEFT); fill(0);
 	text(title, x, y);
 	text(description, x, y + stepY);
-	text("NUM VERTEXS: "+numVertexs+".", x, y +stepY*2);
-	text("NUM DOTS: "+numDots+".", x, y + stepY*3);
-	text("EASING MODE: "+new Ease().METHODS[mode]+".", x, y + stepY*4);
+	text("NUM VERTEXS: "+numVertexs.getValue()+".", x, y +stepY*2);
+	text("NUM DOTS: "+numDots.getValue()+".", x, y + stepY*3);
+	text("EASING MODE: "+new Ease().METHODS[mode.getValue()]+".", x, y + stepY*4);
 }
 
 
 void keyPressed(){
 	if(key==CODED && keyCode==LEFT){
-		numVertexs--;
-		if(numVertexs<minNumVertexs){
-			numVertexs = maxNumVertexs;
-		}
+		numVertexs.previous();
 		updatePolygon = true;
 	}
 	else if(key==CODED && keyCode==RIGHT){
-		numVertexs++;
-		if(numVertexs>maxNumVertexs){
-			numVertexs = minNumVertexs;
-		}
+		numVertexs.next();
 		updatePolygon = true;
 	}
 	else if(key==CODED && keyCode==UP){
-		mode++;
-		if(mode>=new Ease().METHODS.length){
-			mode=0;
-		}
+		mode.next();
 		updatePolygon = true;
 	}
 	else if(key==CODED && keyCode==DOWN){
-		mode--;
-		if(mode<0){
-			mode=new Ease().METHODS.length - 1;
-		}
+		mode.previous();
 		updatePolygon = true;
 	}
 	else if(key=='a'){
