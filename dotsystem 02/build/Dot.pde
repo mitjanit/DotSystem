@@ -11,8 +11,8 @@ class Dot {
 
 	// Display the dot
 	public void display(){
-		fill(0);
-		ellipse(pos.x, pos.y, 5, 5);
+		fill(0); noStroke();
+		ellipse(pos.x, pos.y, 10, 10);
 	}
 
 	//Target movement

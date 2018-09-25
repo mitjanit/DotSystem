@@ -12,18 +12,15 @@ DotPolygon dp;
 int numVertexs = 4;
 int minNumVertexs = 3;
 int maxNumVertexs = 8;
-float angle=0;
-boolean updatePolygon = true;
+
 
 int numDots = 10;
 int minNumDots = 5;
 int maxNumDots = 20;
 
 int mode = 3;
-
-float colX = 60;
-float startY = 50;
-float stepY = 60;
+float angle=0;
+boolean updatePolygon = true;
 
 PFont font;
 String title = "DOT SYSTEM v02.";
@@ -46,12 +43,10 @@ void setup(){
 void draw(){
 
 	int nd = (int) map(mouseX, 0, width, minNumDots, maxNumDots);
-	float na = map(mouseY, 0, height, 0, TWO_PI);
 
-	if(nd!=numDots || na!=angle || updatePolygon){
+	if(nd!=numDots || updatePolygon){
 		numDots = nd;
 		updatePolygon = false;
-		angle = na;
 
 		background(bgColor);
 		createDotPolygon(numVertexs, new PVector(width/2, height/2), 400, angle);
@@ -123,7 +118,11 @@ void keyPressed(){
 		}
 		updatePolygon = true;
 	}
+	else if(key=='a'){
+		angle +=0.1;
+		updatePolygon=true;
+	}
 	else if(key=='p'){
-		saveFrame("frame/dotsystem01-######.png");
+		saveFrame("frame/dotsystem02-######.png");
 	}
 }
