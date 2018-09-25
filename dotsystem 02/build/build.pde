@@ -1,24 +1,24 @@
 
 //********************** Basic Settings ***********************//
 
-int    sceneWidth   = 1750;
-int    sceneHeight  = 900;
-color  bgColor    = #FCFCFC;
+int    sceneWidth   	= 1750;
+int    sceneHeight  	= 900;
+color  bgColor    		= #FCFCFC;
 
 //********************* DotLine Settings ***********************//
 
 DotPolygon dp;
 
-IntRange numVertexs = new IntRange(4, 3, 8, 1, true);
-IntRange numDots = new IntRange(10, 5, 20, 1, true);
-IntRange mode = new IntRange(3, 0, new Ease().METHODS.length-1, 1, true);
+IntRange numVertexs		= new IntRange(4, 3, 12, 1, true);
+IntRange numDots		= new IntRange(10, 3, 20, 1, true);
+IntRange mode 			= new IntRange(3, 0, new Ease().METHODS.length-1, 1, true);
 
-float angle=0;
-boolean updatePolygon = true;
+float angle				= 0;
+boolean updatePolygon 	= true;
 
 PFont font;
-String title = "DOT SYSTEM v02.";
-String description="DOTS DISTRIBUTION ALONG POLYGON LINE USING EASING FUNCTIONS.";
+String title 			= "DOT SYSTEM v02.";
+String description		= "DOTS DISTRIBUTION ALONG POLYGON LINE USING EASING FUNCTIONS.";
 
 void settings() {
 	size(sceneWidth,sceneHeight,P2D);
@@ -27,6 +27,7 @@ void settings() {
 void setup(){
 	background(bgColor);
 	smooth();
+
 	font = createFont("Arial", 14);
 	textFont(font);
 
@@ -47,14 +48,14 @@ void draw(){
 		dp.display(true, true, true);
 		displayInfo(60, 60, 20);
 
-		/*
+		/**/
 		for(Dot p : dp.dots){
 			for(Dot q : dp.dots){
 				stroke(0); strokeWeight(1);
 				line(p.pos.x, p.pos.y, q.pos.x, q.pos.y);
 			}
 		}
-		*/
+		/**/
 	}
 
 }
@@ -77,8 +78,8 @@ void displayInfo(float x, float y, float stepY){
 	textAlign(LEFT); fill(0);
 	text(title, x, y);
 	text(description, x, y + stepY);
-	text("NUM VERTEXS: "+numVertexs.getValue()+".", x, y +stepY*2);
-	text("NUM DOTS: "+numDots.getValue()+".", x, y + stepY*3);
+	text("NUM VERTEXS: "+numVertexs+".", x, y +stepY*2);
+	text("NUM DOTS: "+numDots+".", x, y + stepY*3);
 	text("EASING MODE: "+new Ease().METHODS[mode.getValue()]+".", x, y + stepY*4);
 }
 

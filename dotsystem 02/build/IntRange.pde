@@ -56,5 +56,10 @@ class IntRange {
 		return this.maxValue;
 	}
 
+	@Override
+	public String toString(){
+		return new Integer(currentValue).toString();
+	}
+
 
 }
