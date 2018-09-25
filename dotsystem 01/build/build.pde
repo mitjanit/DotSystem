@@ -70,7 +70,7 @@ void createAllEasing(){
 
 void displayAllEasing(){
 	for(int i=0; i<dls.size(); i++){
-		dls.get(i).display(true, true);
+		dls.get(i).display(true, true, true);
 		if(i>0 && i%3==1){
 			displayGroup(i, i+2);
 		}
