@@ -1,23 +1,33 @@
 
 ArrayList<DotLine> dls;
 
-int numDots = 50;
+int numDots = 10;
 float colX = 60;
 float startY = 50;
 float stepY = 60;
 float lineLength = 600;
 
 void setup(){
-	size(1800, 900);
+	size(1750, 900);
 	background(255);
 	fill(0);
 
 	createAllEasing();
+	displayAllEasing();
+	//noLoop();
+
 }
 
 
 void draw(){
-	displayAllEasing();
+
+	int nd = (int)map(mouseX, 0, width, 3, 50);
+	if(nd!=numDots){
+		numDots = nd;
+		background(255);
+		createAllEasing();
+		displayAllEasing();
+	}
 }
 
 void createAllEasing(){

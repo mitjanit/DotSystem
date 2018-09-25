@@ -111,4 +111,22 @@ class DotSet {
 	}
 
 
+
+	//************** MOTION FUNCTIONS ***************//
+
+	// Move all dots with random walk.
+	public void moveRandom(float minValue, float maxValue){
+		for(Dot d : dots){
+			d.moveRandom(minValue,maxValue);
+		}
+	}
+
+	// Move all dots with circle movement.
+	public void moveRound(PVector centre, float stepAng){
+		for(Dot d : dots){
+			d.moveRound(centre,stepAng);
+		}
+	}
+
+
 }

@@ -61,7 +61,9 @@ class Dot {
 
 	// Display dot as a centroid
 	void displayCentroid(){
-		fill(255, 0, 0); noStroke();
-		ellipse(pos.x, pos.y, 5, 5);
+		//fill(255, 0, 0); noStroke();
+		//ellipse(pos.x, pos.y, 5, 5);
+		stroke(255, 0, 0); strokeWeight(2);
+		line(pos.x, pos.y-10, pos.x, pos.y+10);
 	}
 }
