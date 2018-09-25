@@ -17,7 +17,8 @@ float stepY = 60;
 float lineLength = 600;
 
 PFont font;
-String description="DOT SYSTEM v01.\nDOTS DISTRIBUTION ALONG LINE USING EASING FUNCTIONS.";
+String title = "DOT SYSTEM v01.";
+String description="DOTS DISTRIBUTION ALONG LINE USING EASING FUNCTIONS.";
 
 void settings() {
 	size(sceneWidth,sceneHeight,P2D);
@@ -40,7 +41,7 @@ void draw(){
 		background(bgColor);
 		createAllEasing();
 		displayAllEasing();
-		displayInfo();
+		displayInfo(height - stepY);
 	}
 }
 
@@ -55,6 +56,7 @@ void createAllEasing(){
 		float x = colX + (4*colX + lineLength)*(numCol-1);
 		float xt = x + lineLength + colX;
 		fill(0);
+		textAlign(LEFT, CENTER);
 		text (Ease.METHODS[i], xt, y);
 		DotLine dl = new DotLine(new PVector(x, y), new PVector(x+lineLength, y));
 		dl.setDots(numDots, i);
@@ -75,15 +77,17 @@ void displayAllEasing(){
 	}
 }
 
-void displayInfo(){
-	textAlign(LEFT, CENTER);
-	text(description+"\nNUM DOTS: "+numDots+".", colX, height - stepY);
+void displayInfo(float y){
+	textAlign(LEFT);
+	text(title, colX, y);
+	text(description, colX, y + stepY/3);
+	text("NUM DOTS: "+numDots+".", colX, y + stepY/1.5);
 }
 
 void displayGroup(int i, int j){
 	PVector a = dls.get(i).b;
 	PVector b = dls.get(j).b;
-	stroke(100); strokeWeight(1);
+	stroke(0); strokeWeight(1);
 	line(a.x + colX/4, a.y, a.x + colX/2, a.y);
 	line(a.x + colX/2, a.y, b.x + colX/2, b.y);
 	line(b.x + colX/4, b.y, b.x + colX/2, b.y);
