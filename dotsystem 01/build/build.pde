@@ -7,6 +7,8 @@ float startY = 50;
 float stepY = 60;
 float lineLength = 600;
 
+String description="DOT SYSTEM v01.\nDOTS DISTRIBUTION ALONG LINE USING EASING FUNCTIONS.";
+
 void setup(){
 	size(1750, 900);
 	background(255);
@@ -27,6 +29,7 @@ void draw(){
 		background(255);
 		createAllEasing();
 		displayAllEasing();
+		displayInfo();
 	}
 }
 
@@ -55,4 +58,10 @@ void displayAllEasing(){
 	for(int i=0; i<dls.size(); i++){
 		dls.get(i).display(true, true);
 	}
+}
+
+void displayInfo(){
+	textSize(14);
+	textAlign(LEFT, CENTER);
+	text(description+"\nNUM DOTS: "+numDots+".", colX, height - stepY);
 }
