@@ -10,7 +10,8 @@ color  bgColor    		= #FCFCFC;
 ArrayList<DotCircle> dcs;
 int numCircles = 8;
 
-IntRange numDots		= new IntRange(10, 3, 30, 1, true);
+IntRange numDots		= new IntRange(10, 1, 30, 1, true);
+FloatRange angle		= new FloatRange(0, 0, TWO_PI, 0.01, true);
 boolean updatePolygon 	= true;
 
 PFont font;
@@ -40,14 +41,16 @@ void setup(){
 void draw(){
 
 	int nd = (int) map(mouseX, 0, width, numDots.getMinValue(), numDots.getMaxValue());
+	float a = map(mouseY, 0, height, angle.getMinValue(), angle.getMaxValue());
 
-	if(nd!=numDots.getValue() || updatePolygon){
+	if(nd!=numDots.getValue() || a!=angle.getValue() || updatePolygon){
 		numDots.setValue(nd);
+		angle.setValue(a);
 		background(bgColor);
 		//createDotCircle(numDots.getValue(), new PVector(width/2, height/2), 400, 0);
 		dcs = new ArrayList<DotCircle>();
 		for(int i=0; i<numCircles; i++){
-			DotCircle dc = 	createDotCircle(numDots.getValue(), new PVector(width/2, height/2), 50 + 50*i, 0);
+			DotCircle dc = 	createDotCircle(numDots.getValue(), new PVector(width/2, height/2), 50 + 50*i, a);
 			dcs.add(dc);
 		}
 		for(DotCircle dc : dcs){
@@ -70,6 +73,7 @@ void displayInfo(float x, float y, float stepY){
 	text(title, x, y);
 	text(description, x, y + stepY);
 	text("NUM DOTS: "+numDots+".", x, y + stepY*2);
+	text("ANGLE: "+angle+".", x, y + stepY*3);
 }
 
 /*
