@@ -8,7 +8,7 @@ color  bgColor    		= #FCFCFC;
 //********************* DotLine Settings ***********************//
 
 ArrayList<DotWave> dws;
-int numWaves 			= 3;
+int numWaves 			= 5;
 
 IntRange 	numDots		= new IntRange(50, 1, 300, 1, true);
 FloatRange 	angle 		= new FloatRange(0, 0, TWO_PI, 0.01, true);
@@ -18,7 +18,7 @@ boolean updatePolygon 	= true;
 
 PFont font;
 String title 			= "DOT SYSTEM v04.";
-String description		= "DOTS DISTRIBUTION ALONG SINUS WAVE LINE USING EASING.";
+String description		= "DOTS DISTRIBUTION ALONG SINUS WAVE.";
 
 void settings() {
 	size(sceneWidth,sceneHeight,P3D);
@@ -56,12 +56,12 @@ void draw(){
 }
 
 void createWaves(){
-	float stepY = 200;
+	float stepY = 250;
 	dws = new ArrayList<DotWave>();
 	for(int i=0; i<numWaves; i++){
-		PVector start = new PVector(0, height/4 + stepY*i +stepY/2);
-		PVector end = new PVector(width, height/4 + stepY*i );
-		DotWave dw = createDotWave(numDots.getValue(), start, end, 100, angle.getValue());
+		PVector start = new PVector(width/4 + stepY*i +stepY/2, 0);
+		PVector end = new PVector(width/4 + stepY*i, height );
+		DotWave dw = createDotWave(numDots.getValue(), start, end, 100, angle.getValue()+i*PI/4);
 		dws.add(dw);
 	}
 }

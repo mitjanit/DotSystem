@@ -17,11 +17,19 @@ class DotWave extends DotSet {
 	void setDots(int num, float angStart, int mode){
 		dots = new ArrayList<Dot>();
 		float angle=angStart;
+		float dx = abs(a.x - b.x);
+		float dy = abs(a.y - b.y);
 		for (float i = 0; i <= num; i++){
 			float v = i / (num-1);
 			v = Ease.ease(v, mode);
   			float x = (b.x * v) + (a.x * (1 - v));
-  			float y = (b.y * v) + (a.y * (1 - v)) + amplitude*sin(angle);
+  			float y = (b.y * v) + (a.y * (1 - v));
+  			if(dx >= dy){
+  				y += amplitude*sin(angle);
+  			}
+  			else {
+  				x += amplitude*sin(angle);
+  			}
 			PVector p = new PVector(x, y);
   			addDot(new Dot(new PVector(x, y)));
   			angle +=0.51;
