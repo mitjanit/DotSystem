@@ -10,9 +10,9 @@ color  bgColor    		= #FCFCFC;
 ArrayList<DotWave> dws;
 int numWaves 			= 3;
 
-IntRange numDots		= new IntRange(50, 1, 300, 1, true);
-FloatRange angle		= new FloatRange(0, 0, TWO_PI, 0.01, true);
-IntRange mode 			= new IntRange(3, 0, new Ease().METHODS.length-1, 1, true);
+IntRange 	numDots		= new IntRange(50, 1, 300, 1, true);
+FloatRange 	angle 		= new FloatRange(0, 0, TWO_PI, 0.01, true);
+IntRange 	mode 		= new IntRange(3, 0, new Ease().METHODS.length-1, 1, true);
 
 boolean updatePolygon 	= true;
 
