@@ -8,7 +8,7 @@ color  bgColor    		= #FCFCFC;
 //********************* DotLine Settings ***********************//
 
 ArrayList<DotWave> dws;
-int numWaves = 3;
+int numWaves 			= 3;
 
 IntRange numDots		= new IntRange(50, 1, 300, 1, true);
 FloatRange angle		= new FloatRange(0, 0, TWO_PI, 0.01, true);
