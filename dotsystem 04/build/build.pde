@@ -1,8 +1,8 @@
 
 //********************** Basic Settings ***********************//
 
-int    sceneWidth   	= 1750;
-int    sceneHeight  	= 900;
+int    sceneWidth 		= 1750;
+int    sceneHeight 		= 900;
 color  bgColor    		= #FCFCFC;
 
 //********************* DotLine Settings ***********************//
