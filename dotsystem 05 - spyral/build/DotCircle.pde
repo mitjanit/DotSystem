@@ -13,22 +13,12 @@ class DotCircle extends DotSet {
 	}
 
 
-	void setDots(int num, float a0, int mode){
+	void setDots(int num, float a0){
 		dots = new ArrayList<Dot>();
 		for (float i = 0; i < num; i++){
-  			
-  			/*
   			float a = i * ( TWO_PI / num);
   			float x = c.x + radius*cos(a0+a);
   			float y = c.y + radius*sin(a0+a);
-  			*/
-
-  			float v = i / (num);
-  			v = Ease.ease(v, mode);
-  			float ae = ((TWO_PI+a0) * v) + (a0*(1 - v));
-  			float x = c.x + radius*cos(ae);
-  			float y = c.y + radius*sin(ae);
-  			
   			addDot(new Dot(new PVector(x, y)));
 		} 
 	}
