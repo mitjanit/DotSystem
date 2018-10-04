@@ -21,7 +21,7 @@ class DotSet {
 	// Add a dot to the set
 	public void addDot(Dot d){
 		dots.add(d);
-		centroid = getCentroid();
+		this.centroid = getCentroid();
 	}
 
 	// Return the collection of dots

@@ -12,6 +12,8 @@ int numCircles = 8;
 
 IntRange numDots		= new IntRange(10, 1, 30, 1, true);
 FloatRange angle		= new FloatRange(0, 0, TWO_PI, 0.01, true);
+IntRange 	mode 		= new IntRange(3, 0, new Ease().METHODS.length-1, 1, true);
+
 boolean updatePolygon 	= true;
 
 PFont font;
@@ -63,7 +65,7 @@ void draw(){
 
 DotCircle createDotCircle(int n, PVector c, float r, float a0){
 	DotCircle dc = new DotCircle(c, r);
-	dc.setDots(n, a0);
+	dc.setDots(n, a0, mode.getValue());
 	return dc;
 }
 
@@ -72,8 +74,24 @@ void displayInfo(float x, float y, float stepY){
 	textAlign(LEFT); fill(0);
 	text(title, x, y);
 	text(description, x, y + stepY);
-	text("NUM DOTS: "+numDots+".", x, y + stepY*2);
-	text("ANGLE: "+angle+".", x, y + stepY*3);
+	text("EASING: "+new Ease().METHODS[mode.getValue()]+".", x, y + stepY*2);
+	text("NUM DOTS: "+numDots+".", x, y + stepY*3);
+	text("ANGLE: "+angle+".", x, y + stepY*4);
+}
+
+void keyPressed(){
+	if(key==CODED && keyCode==LEFT){
+		mode.previous();
+		updatePolygon = true;
+	}
+	else if(key==CODED && keyCode==RIGHT){
+		mode.next();
+		updatePolygon = true;
+	}
+	else if(key=='p'){
+		saveFrame("frame/dotsystem02-######.png");
+	}
+
 }
 
 /*
