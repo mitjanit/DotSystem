@@ -16,6 +16,8 @@ IntRange 	mode 		= new IntRange(0, 0, new Ease().METHODS.length-1, 1, true);
 
 boolean updatePolygon 	= true;
 float angleStart = PI/4;
+int direction = 1;
+
 PFont font;
 String title 			= "DOT SYSTEM v05.2";
 String description		= "DOTS DISTRIBUTION ALONG POLYGONAL SPIRAL.";
@@ -45,6 +47,7 @@ void draw(){
 		numDots.setValue(nd);
 		angle.setMaxValue(aMax);
 		updatePolygon = false;
+		
 		background(255, 200, 200);
 		createPolySpiral();
 		dps.display(true, true, true);
@@ -54,7 +57,7 @@ void draw(){
 
 void createPolySpiral(){
 	dps = new DotPolySpiral(new PVector(width/2, height/2), 12, angle, radius);
-	dps.setDirection(-1);
+	dps.setDirection(direction);
 	dps.setDots(numDots.getValue(), angleStart, mode.getValue());
 }
 
@@ -66,6 +69,7 @@ void displayInfo(float x, float y, float stepY){
 	text("EASING: "+new Ease().METHODS[mode.getValue()]+".", x, y + stepY*2);
 	text("NUM DOTS: "+numDots+".", x, y + stepY*3);
 	text("RADIUS: "+radius.getMaxValue()+".", x, y + stepY*4);
+	text("NUM LAPS: "+angle.getMaxValue()/TWO_PI+".", x, y + stepY*5);
 }
 
 
@@ -79,7 +83,7 @@ void keyPressed(){
 		updatePolygon = true;
 	}
 	else if(key==CODED && (keyCode==UP || keyCode==DOWN)){
-		//direction*=-1;
+		direction*=-1;
 		updatePolygon = true;
 	}
 	else if(key=='p'){
